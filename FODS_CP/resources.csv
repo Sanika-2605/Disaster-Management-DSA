@@ -1,0 +1,11 @@
+id,name,category,quantity
+1,Water Bottles,Supplies,1000
+2,Medical Kits,Medical,50
+3,Blankets,Supplies,200
+4,Food Rations,Supplies,500
+5,First Aid Kits,Medical,75
+6,Emergency Radios,Communication,25
+7,Flashlights,Equipment,150
+8,Generators,Equipment,10
+9,Rescue Ropes,Equipment,30
+10,Sanitizer,Medical,100

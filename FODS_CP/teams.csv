@@ -1,0 +1,9 @@
+id,team_name,specialization,status,location
+1,Alpha Team,Search and Rescue,Available,Station A
+2,Bravo Team,Medical Response,Deployed,Incident Site 1
+3,Charlie Team,Fire Suppression,Available,Station B
+4,Delta Team,Evacuation,Standby,Command Center
+5,Echo Team,Communication,Deployed,Incident Site 2
+6,Foxtrot Team,Logistics,Available,Depot
+7,Golf Team,Medical Response,Available,Station C
+8,Hotel Team,Search and Rescue,Deployed,Incident Site 3

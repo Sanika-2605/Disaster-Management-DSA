@@ -1,0 +1,9 @@
+id,name,location,capacity,occupied,safety_score
+1,Emergency Center A,Downtown,100,50,85
+2,Community Hall B,Uptown,80,30,92
+3,School Gym C,Eastside,120,90,78
+4,Church Basement D,Westside,60,20,95
+5,Recreation Center E,North,90,70,88
+6,Convention Center F,South,200,150,82
+7,Library Hall G,Central,70,45,90
+8,Community Center H,Suburbs,85,60,87

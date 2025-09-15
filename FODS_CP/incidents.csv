@@ -1,0 +1,11 @@
+id,type,severity,location,timestamp,status
+1,Flood,8,Main Street,2024-01-15 14:30:00,Active
+2,Fire,6,Industrial Zone,2024-01-15 16:45:00,Resolved
+3,Earthquake,9,City Center,2024-01-15 18:20:00,Active
+4,Chemical Spill,7,Port Area,2024-01-15 20:10:00,Under Investigation
+5,Power Outage,5,North District,2024-01-15 22:00:00,Resolved
+6,Landslide,8,Mountain Road,2024-01-16 08:15:00,Active
+7,Traffic Accident,4,Highway 101,2024-01-16 10:30:00,Resolved
+8,Building Collapse,9,Old Town,2024-01-16 12:45:00,Active
+9,Wildfire,7,Forest Area,2024-01-16 14:20:00,Under Investigation
+10,Water Contamination,6,Reservoir,2024-01-16 16:00:00,Active
