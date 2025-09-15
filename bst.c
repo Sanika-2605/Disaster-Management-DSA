@@ -6,36 +6,36 @@
 typedef struct Resource {
     char id[10];
     char name[50];
+    char category[30];
     int quantity;
-    char location[50];
     struct Resource *left, *right;
 } Resource;
 
 // ---------------- BST FUNCTIONS ----------------
-Resource* createNode(char* id, char* name, int qty, char* location) {
+Resource* createNode(char* id, char* name, char* category, int qty) {
     Resource* newNode = (Resource*)malloc(sizeof(Resource));
     strcpy(newNode->id, id);
     strcpy(newNode->name, name);
+    strcpy(newNode->category, category);
     newNode->quantity = qty;
-    strcpy(newNode->location, location);
     newNode->left = newNode->right = NULL;
     return newNode;
 }
 
-Resource* insertBST(Resource* root, char* id, char* name, int qty, char* location) {
-    if (root == NULL) return createNode(id, name, qty, location);
+Resource* insertBST(Resource* root, char* id, char* name, char* category, int qty) {
+    if (root == NULL) return createNode(id, name, category, qty);
     if (strcmp(name, root->name) < 0)
-        root->left = insertBST(root->left, id, name, qty, location);
+        root->left = insertBST(root->left, id, name, category, qty);
     else if (strcmp(name, root->name) > 0)
-        root->right = insertBST(root->right, id, name, qty, location);
+        root->right = insertBST(root->right, id, name, category, qty);
     return root;
 }
 
 void inorder(Resource* root) {
     if (root != NULL) {
         inorder(root->left);
-        printf("ID:%s | Name:%s | Qty:%d | Location:%s\n",
-               root->id, root->name, root->quantity, root->location);
+        printf("ID:%s | Name:%s | Category:%s | Qty:%d\n",
+               root->id, root->name, root->category, root->quantity);
         inorder(root->right);
     }
 }
@@ -56,46 +56,32 @@ void allocateResource(Resource* root, char* name, int qty) {
     }
     if (res->quantity >= qty) {
         res->quantity -= qty;
-        printf("Allocated %d of %s. Remaining: %d\n",
+        printf("✅ Allocated %d of %s. Remaining: %d\n",
                qty, res->name, res->quantity);
     } else {
-        printf("Not enough quantity! Available: %d\n", res->quantity);
+        printf("⚠️ Not enough quantity! Available: %d\n", res->quantity);
     }
 }
 
-// ---------------- KMP FUNCTIONS ----------------
-void computeLPS(char* pat, int M, int* lps) {
-    int len = 0, i = 1;
-    lps[0] = 0;
-    while (i < M) {
-        if (pat[i] == pat[len]) {
-            lps[i++] = ++len;
-        } else {
-            if (len != 0)
-                len = lps[len - 1];
-            else
-                lps[i++] = 0;
-        }
+// ---------------- LOAD CSV ----------------
+Resource* loadResourcesCSV(Resource* root, const char* filename) {
+    FILE* fp = fopen(filename, "r");
+    if (!fp) {
+        printf("Could not open file %s\n", filename);
+        return root;
     }
-}
 
-void KMPSearch(char* pat, char* txt) {
-    int M = strlen(pat);
-    int N = strlen(txt);
-    int lps[M];
-    computeLPS(pat, M, lps);
+    char line[256];
+    fgets(line, sizeof(line), fp); // skip header
 
-    int i = 0, j = 0;
-    while (i < N) {
-        if (pat[j] == txt[i]) {
-            i++; j++;
-        }
-        if (j == M) {
-            printf(" Found pattern at index %d in '%s'\n", i - j, txt);
-            j = lps[j - 1];
-        } else if (i < N && pat[j] != txt[i]) {
-            if (j != 0) j = lps[j - 1];
-            else i++;
-        }
+    while (fgets(line, sizeof(line), fp)) {
+        char id[10], name[50], category[30];
+        int qty;
+        sscanf(line, "%[^,],%[^,],%[^,],%d", id, name, category, &qty);
+        root = insertBST(root, id, name, category, qty);
     }
+
+    fclose(fp);
+    printf("✅ Resources loaded from %s\n", filename);
+    return root;
 }
